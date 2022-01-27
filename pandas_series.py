@@ -160,10 +160,15 @@ exam_scores.mean()
 exam_scores.median()
 
 #3. Plot the Series in a meaningful way and make sure your chart has a title and axis labels.
-
+exam_scores.plot.hist()
+plt.title('All_Grades')
+plt(show)
 #4. Write the code necessary to implement a curve for your exam_grades Series and save this as curved_grades. 
 # Add the necessary points to the highest grade to make it 100, and add the same number of 
 # points to every other score in the Series as well.
+curve = 100 - exam_scores.max()
+curved_grades = exam_scores+curve
+curved_grades
 
 #5. Use a method to convert each of the numeric values in the curved_grades Series into a categorical value of 
 # letter grades. For example, 86 should be a 'B' and 95 should be an 'A'. Save this as a Series named letter_grades.
