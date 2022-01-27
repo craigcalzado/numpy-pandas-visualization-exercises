@@ -1,8 +1,6 @@
 #---------- EXERCISES PART I ---------- 
 #setup
 from itertools import count
-from operator import indexOf
-from tkinter import N
 import numpy as np
 import pandas as pd
 
@@ -60,5 +58,38 @@ print(fsc)
 print('Total:', sum(fsc))
 
 #3. Output the number of vowels in each and every string value.
-vowels = list('aeiou')
-fruits.isin(vowels)
+fruits.str.count('[aeiou]')
+
+#4. Write the code to get the longest string value from fruits.
+max(fruits.str.count('[a-z]'))
+
+#5. Write the code to get the string values with 5 or more letters in the name.
+fruits[fruits.str.len() >= 5]
+
+#6. Use the .apply method with a lamdba function to find the fruit(s) containg the
+# containing the letter 'o' two or more times.
+fruits[fruits.apply(lambda x: x.count('o') >= 2)]
+
+#7. Write the code to get only the string values containing the substring 'berry'.
+fruits[fruits.str.contains('berry')]
+
+#8.  Write the code to get only the string values containing the substring 'apple'.
+fruits[fruits.str.contains('apple')]
+
+#9. Which string value contains the most vowels?
+fruits[fruits.str.count('[aeiou]').max()]
+
+#---------- EXERCISES PART III -----------
+# Setup
+raw_letters = 'hnvidduckkqxwymbimkccexbkmqygkxoyndmcxnwqarhyffsjpsrabtjzsypmzadfavyrnndndvswreauxovncxtwzpwejilzjrmmbbgbyxvjtewqthafnbkqplarokkyydtubbmnexoypulzwfhqvckdpqtpoppzqrmcvhhpwgjwupgzhiofohawytlsiyecuproguy'
+letters = pd.Series(list(raw_letters))
+
+#1. Which letter occurs the most frequently in the letters Series?
+letters.value_counts().head(1)
+
+#2. Which letter occurs the Least frequently?
+letters.value_counts().tail(1)
+
+
+
+
