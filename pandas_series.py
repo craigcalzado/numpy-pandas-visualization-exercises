@@ -1,5 +1,6 @@
 #---------- EXERCISES PART I ---------- 
 #setup
+from distutils.command.clean import clean
 from itertools import count
 import numpy as np
 import pandas as pd
@@ -62,7 +63,7 @@ print('Total:', sum(fsc))
 fruits.str.count('[aeiou]')
 
 #4. Write the code to get the longest string value from fruits.
-max(fruits.str.count('[a-z]'))
+fruits.str.len().max()
 
 #5. Write the code to get the string values with 5 or more letters in the name.
 fruits[fruits.str.len() >= 5]
@@ -120,4 +121,51 @@ numbers.count()
 
 #3. Perform the necessary manipulations by accessing Series attributes
 # and methods to convert the numbers Series to a numeric data type.
-numbers.str.replace(',','').str.replace('$','')
+no_comma_num = numbers.str.replace(',','')
+clean_numbers = no_comma_num.str.replace('$','')
+clean_numbers = clean_numbers.astype(float)
+numbers = clean_numbers
+print(numbers)
+
+#4. Run the code to discover the maximum value from the Series.
+max_num = numbers.max()
+print(max_num)
+
+#5. Run the code to discover the maximum value from the Series.
+min_num = numbers.min()
+print(min_num)
+
+#6. What is the range of the values in the Series?
+range_of_num = max_num - min_num
+print(range_of_num)
+
+#7. Bin the data into 4 equally sized intervals or bins and output how 
+# many values fall into each bin.
+numbers.value_counts(bins=4)
+
+#8. Plot the binned data in a meaningful way. Be sure to include a title and axis labels.
+numbers.value_counts(bins=4).plot.hist()
+# Create a series names 'exam_scores' from the following list.
+raw_grades = [60, 86, 75, 62, 93, 71, 60, 83, 95, 78, 65, 72, 69, 81, 96, 80, 85, 92, 82, 78]
+exam_scores = pd.Series(raw_grades)
+exam_scores
+
+#1. How many elements are in the exam_scores Series?
+exam_scores.value_counts().sum()
+
+#2. Run the code to discover the min, max, mean, and median scores for exam_scores.
+exam_scores.min()
+exam_scores.max()
+exam_scores.mean()
+exam_scores.median()
+
+#3. Plot the Series in a meaningful way and make sure your chart has a title and axis labels.
+
+#4. Write the code necessary to implement a curve for your exam_grades Series and save this as curved_grades. 
+# Add the necessary points to the highest grade to make it 100, and add the same number of 
+# points to every other score in the Series as well.
+
+#5. Use a method to convert each of the numeric values in the curved_grades Series into a categorical value of 
+# letter grades. For example, 86 should be a 'B' and 95 should be an 'A'. Save this as a Series named letter_grades.
+
+#6. Plot your new categorical letter_grades Series in a meaninful way and include a title and axis labels.
