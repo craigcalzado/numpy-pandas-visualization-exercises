@@ -3,6 +3,7 @@
 from itertools import count
 import numpy as np
 import pandas as pd
+import matplotlib as plt
 
 array_fruits = np.array(["kiwi", "mango", "strawberry", "pineapple", "gala apple", "honeycrisp apple", "tomato", "watermelon", "honeydew", "kiwi", "kiwi", "kiwi", "mango", "blueberry", "blackberry", "gooseberry", "papaya"])
 fruits = pd.Series(array_fruits)
@@ -90,6 +91,33 @@ letters.value_counts().head(1)
 #2. Which letter occurs the Least frequently?
 letters.value_counts().tail(1)
 
+#3. How many vowels are in the Series?
+num_of_vow = letters.str.count('[aeiou]').sum()
+print(num_of_vow)
 
+#4. How many consonants are in the Series?
+total_value = letters.value_counts().sum()
+total_vow  = letters.str.count('[aeiou]').sum()
+total_con = total_value - total_vow
+print(total_con)
 
+#5. Create a Series that has all of the same letters but uppercased.
+letters.str.upper()
 
+#6. Create a barplot of the frequencies of the 6 most commonly occuring letters.
+six_top = letters.value_counts().head(6)
+six_top.plot.hist()
+
+# Create a Series named 'numbers' from the following:
+raw_numbers = ['$796,459.41', '$278.60', '$482,571.67', '$4,503,915.98', '$2,121,418.3', '$1,260,813.3', '$87,231.01', '$1,509,175.45', '$4,138,548.00', '$2,848,913.80', '$594,715.39', '$4,789,988.17', '$4,513,644.5', '$3,191,059.97', '$1,758,712.24', '$4,338,283.54', '$4,738,303.38', '$2,791,759.67', '$769,681.94', '$452,650.23']
+numbers = pd.Series(raw_numbers)
+
+#1.  What is the data type of the numbers Series?
+type(numbers[1])
+
+#2. How many elements are in the number Series?
+numbers.count()
+
+#3. Perform the necessary manipulations by accessing Series attributes
+# and methods to convert the numbers Series to a numeric data type.
+numbers.str.replace(',','').str.replace('$','')
