@@ -2,6 +2,7 @@
 #setup
 from distutils.command.clean import clean
 from itertools import count
+from pydoc import describe
 import numpy as np
 import pandas as pd
 import matplotlib as plt
@@ -158,7 +159,8 @@ exam_scores.min()
 exam_scores.max()
 exam_scores.mean()
 exam_scores.median()
-
+# or
+exam_scores.describe()
 #3. Plot the Series in a meaningful way and make sure your chart has a title and axis labels.
 exam_scores.plot.hist()
 plt.title('All_Grades')
@@ -172,5 +174,23 @@ curved_grades
 
 #5. Use a method to convert each of the numeric values in the curved_grades Series into a categorical value of 
 # letter grades. For example, 86 should be a 'B' and 95 should be an 'A'. Save this as a Series named letter_grades.
+def con_grades(n):
+    if n >= 90:
+        return 'A'
+    elif n >= 80:
+        return 'B'
+    elif n >= 70:
+        return 'C'
+    elif n >= 60:
+        return 'D'
+    else:
+        return 'F'
 
+letter_grades = curved_grades.apply(con_grades)
+letter_grades
+    
 #6. Plot your new categorical letter_grades Series in a meaninful way and include a title and axis labels.
+letter_grades.value_counts().plot.bar().sort_index()
+plt.title('Grades')
+plt.xlabel('Letter')
+plt.ylable('How Many')
