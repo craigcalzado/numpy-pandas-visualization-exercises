@@ -184,3 +184,18 @@ mam.dtypes
 # c. 
 mam.info()
 mam.describe()
+
+# d. 
+mam.sort_values('speed', ascending=False).head(1).iat[0,0]
+
+# e. 
+spc_mean = mam.specials.mean()
+spc_perc = (spc_mean * 100)
+print(spc_perc)
+
+# f. 
+total_hoppers = mam.hoppers.sum()
+median_speed = mam.speed.median()
+above_median = mam.hoppers < median_speed
+above_median
+mam
